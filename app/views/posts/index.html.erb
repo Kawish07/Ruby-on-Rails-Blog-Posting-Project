@@ -1,0 +1,38 @@
+<div class="page-hero">
+  <h1>Latest Posts</h1>
+  <p class="tagline">Thoughts, tutorials &amp; stories from the blog</p>
+</div>
+
+<% if @posts.any? %>
+  <div class="posts-grid">
+    <% @posts.each do |post| %>
+      <article class="post-card">
+        <h2><%= link_to post.title, post_path(post) %></h2>
+        <div class="post-meta">
+          <span class="meta-date"><%= post.created_at.strftime("%b %d, %Y") %></span>
+          <% if post.published %>
+            <span class="badge badge-success">Published</span>
+          <% else %>
+            <span class="badge badge-warning">Draft</span>
+          <% end %>
+        </div>
+        <p class="post-excerpt"><%= truncate(post.content, length: 160) %></p>
+        <div class="card-footer">
+          <%= link_to "Read More →", post_path(post), class: "btn btn-ghost" %>
+          <%= link_to "Edit", edit_post_path(post), class: "btn btn-outline btn-sm" %>
+          <%= button_to "Delete", post_path(post),
+                        method: :delete,
+                        data: { turbo_confirm: "Are you sure?" },
+                        class: "btn btn-danger btn-sm" %>
+        </div>
+      </article>
+    <% end %>
+  </div>
+<% else %>
+  <div class="empty-state">
+    <div class="empty-icon">&#9997;</div>
+    <h3>No posts yet</h3>
+    <p>Get started by writing your first article!</p>
+    <%= link_to "+ Create Post", new_post_path, class: "btn btn-primary" %>
+  </div>
+<% end %>

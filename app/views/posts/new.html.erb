@@ -1,0 +1,10 @@
+<div class="form-container">
+  <div class="form-card">
+    <div class="form-accent"></div>
+    <div class="form-body">
+      <h1>Create New Post</h1>
+      <%= render "form", post: @post %>
+      <p style="margin-top: 1rem;"><%= link_to "← Cancel", posts_path, class: "btn btn-outline" %></p>
+    </div>
+  </div>
+</div>

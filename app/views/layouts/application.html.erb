@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>DevBlog — Rails Blog</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <%= stylesheet_link_tag "application", media: "all", "data-turbo-track": "reload" %>
+  </head>
+
+  <body>
+    <!-- Top accent bar -->
+    <div class="top-bar"></div>
+
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="<%= root_path %>" class="brand">
+          <span class="brand-icon">&#9998;</span>
+          <span class="brand-text">Dev<span class="brand-accent">Blog</span></span>
+        </a>
+        <nav class="site-nav">
+          <%= link_to "Home", posts_path, class: "nav-link" %>
+          <%= link_to "+ New Post", new_post_path, class: "nav-cta" %>
+        </nav>
+      </div>
+    </header>
+
+    <main class="site-main">
+      <div class="container">
+        <% if notice %>
+          <div class="flash flash-success" role="alert">
+            <span class="flash-icon">&#10003;</span>
+            <%= notice %>
+          </div>
+        <% end %>
+
+        <% if alert %>
+          <div class="flash flash-error" role="alert">
+            <span class="flash-icon">!</span>
+            <%= alert %>
+          </div>
+        <% end %>
+
+        <%= yield %>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container footer-inner">
+        <p class="footer-brand">Dev<span class="brand-accent">Blog</span></p>
+        <p class="footer-copy">&copy; 2026 Built with Ruby on Rails 7 &mdash; Learning Project</p>
+      </div>
+    </footer>
+  </body>
+</html>
